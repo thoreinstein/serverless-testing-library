@@ -10,11 +10,21 @@
     "mocha",
     "jest"
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/janders223/serverless_testing_library.git"
+  },
   "homepage": "https://github.com/janders223/serverless_testing_library",
+  "bugs": {
+    "url": "https://github.com/janders223/serverless_testing_library/issues"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": {
+    "name": "Jim Anders",
+    "email": "jim@janders223.com"
+  },
+  "license": "MIT"
 }

@@ -6,6 +6,12 @@ serverless_testing_library
 :Revision: 1.0.0
 :source-highlighter: highlightjs
 
+image:https://img.shields.io/npm/v/serverless_testing_library.svg[NpmVersion]
+image:https://travis-ci.com/janders223/serverless_testing_library.svg?branch=master["Build Status", link="https://travis-ci.com/janders223/serverless_testing_library"]
+image:https://api.codacy.com/project/badge/Grade/80168f8cd1574e9bae26da8bb62d4414["Codacy code quality", link="https://www.codacy.com/project/janders223/serverless_testing_library/dashboard?utm_source=github.com&utm_medium=referral&utm_content=janders223/serverless_testing_library&utm_campaign=Badge_Grade_Dashboard"]
+image:https://img.shields.io/github/issues-raw/janders223/serverless_testing_library.svg[Issues]
+image:https://img.shields.io/github/license/janders223/serverless_testing_library.svg[License]
+
 :toc:
 :toc-placement!:
 
