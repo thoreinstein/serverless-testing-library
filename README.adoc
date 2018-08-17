@@ -12,11 +12,12 @@ endif::[]
 :toc:
 :toc-placement!:
 
-image:https://img.shields.io/npm/v/serverless_testing_library.svg[NpmVersion]
+image:https://img.shields.io/npm/v/serverless_testing_library.svg["NpmVersion", link="https://www.npmjs.com/package/serverless_testing_library"]
 image:https://travis-ci.com/janders223/serverless_testing_library.svg?branch=master["Build Status", link="https://travis-ci.com/janders223/serverless_testing_library"]
 image:https://api.codacy.com/project/badge/Grade/80168f8cd1574e9bae26da8bb62d4414["Codacy code quality", link="https://www.codacy.com/project/janders223/serverless_testing_library/dashboard?utm_source=github.com&utm_medium=referral&utm_content=janders223/serverless_testing_library&utm_campaign=Badge_Grade_Dashboard"]
-image:https://img.shields.io/github/issues-raw/janders223/serverless_testing_library.svg[Issues]
-image:https://img.shields.io/github/license/janders223/serverless_testing_library.svg[License]
+image:https://img.shields.io/github/issues-raw/janders223/serverless_testing_library.svg["Issues", link="https://github.com/janders223/serverless_testing_library/issues"]
+image:https://img.shields.io/github/license/janders223/serverless_testing_library.svg["License", link="https://github.com/janders223/serverless_testing_library/blob/master/LICENSE"]
+image:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg["Semantic Release", link="https://github.com/semantic-release/semantic-release"]
 
 `serverless_testing_library` is a small library to make integration or smoke testing your https://serverless.com[serverless] API's easier.
 

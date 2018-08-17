@@ -11,20 +11,73 @@
     "jest"
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/janders223/serverless_testing_library.git"
+    "type": "git",
+    "url": "https://github.com/janders223/serverless_testing_library.git"
   },
   "homepage": "https://github.com/janders223/serverless_testing_library",
   "bugs": {
     "url": "https://github.com/janders223/serverless_testing_library/issues"
   },
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && tsc",
+    "commitmsg": "commitlint -E GIT_PARAMS",
+    "docs": "typedoc --out docs/ src/**/*.ts",
+    "lint": "tslint src/**/*.ts",
+    "lint:ci": "tslint -o results/tslint/results.xml --formatters-dir node_modules/tslint-junit-formatter/formatters --format junit src/**/*.ts",
+    "lint:fix": "npm run lint -- --fix && npx prettier src/**/*.ts --write",
+    "semantic-release": "semantic-release",
+    "test": "NODE_ENV=test jest",
+    "test:ci": "NODE_ENV=test jest --ci --coverage"
   },
   "author": {
     "name": "Jim Anders",
     "email": "jim@janders223.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "@types/jest": "^22.2.3",
+    "@types/js-yaml": "^3.11.2",
+    "@types/jsonpath": "^0.2.0",
+    "@types/node": "^10.5.2",
+    "husky": "^0.14.3",
+    "jest": "^22.4.4",
+    "jest-junit": "^5.1.0",
+    "prettier": "^1.14.2",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.9.8",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0",
+    "tslint-junit-formatter": "^5.1.0",
+    "typedoc": "^0.11.1",
+    "typescript": "^3.0.1"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "skipBabel": true
+      }
+    },
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }
