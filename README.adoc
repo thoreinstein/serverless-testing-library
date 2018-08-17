@@ -1,19 +1,24 @@
-serverless_testing_library
-==========================
-:Author: Jim Anders
-:Email: jim@janders223.com
-:Date: Fri Aug 17 05:35:30 EDT 2018
-:Revision: 1.0.0
-:source-highlighter: highlightjs
+== serverless_testing_library
+ifdef::env-github[]
+:imagesdir:
+ https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+ifndef::env-github[]
+:imagesdir: ./
+endif::[]
+:toc:
+:toc-placement!:
 
 image:https://img.shields.io/npm/v/serverless_testing_library.svg[NpmVersion]
 image:https://travis-ci.com/janders223/serverless_testing_library.svg?branch=master["Build Status", link="https://travis-ci.com/janders223/serverless_testing_library"]
 image:https://api.codacy.com/project/badge/Grade/80168f8cd1574e9bae26da8bb62d4414["Codacy code quality", link="https://www.codacy.com/project/janders223/serverless_testing_library/dashboard?utm_source=github.com&utm_medium=referral&utm_content=janders223/serverless_testing_library&utm_campaign=Badge_Grade_Dashboard"]
 image:https://img.shields.io/github/issues-raw/janders223/serverless_testing_library.svg[Issues]
 image:https://img.shields.io/github/license/janders223/serverless_testing_library.svg[License]
-
-:toc:
-:toc-placement!:
 
 `serverless_testing_library` is a small library to make integration or smoke testing your https://serverless.com[serverless] API's easier.
 
@@ -26,7 +31,7 @@ toc::[]
 const test = require('serverless_testing_library');
 
 it('gets a 200 response', async () => {
-  const response = test('handler').get();
+  const response = await test('handler').get();
 
   assert.equal(response.status, 200);
 })
@@ -40,10 +45,19 @@ The top level test method sets up the method that you want to
 
 == Install
 
+[source,bash]
+----
+npm install --save-dev serverless_testing_library
+----
+
 == Acknowledgements
+
+`serverless_testing_library` is heavily inspired by http://www.chaijs.com/plugins/chai-http/[chai-http]. The name for this library was inspired by https://github.com/kentcdodds/react-testing-library[react-testing-library] but with more Unix.
 
 == See Also
 
 == License
+
+See
 
 // vim: set syntax=asciidoc:
