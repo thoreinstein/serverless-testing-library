@@ -1,0 +1,43 @@
+serverless_testing_library
+==========================
+:Author: Jim Anders
+:Email: jim@janders223.com
+:Date: Fri Aug 17 05:35:30 EDT 2018
+:Revision: 1.0.0
+:source-highlighter: highlightjs
+
+:toc:
+:toc-placement!:
+
+`serverless_testing_library` is a small library to make integration or smoke testing your https://serverless.com[serverless] API's easier.
+
+toc::[]
+
+== Usage
+
+[source,javascript]
+----
+const test = require('serverless_testing_library');
+
+it('gets a 200 response', async () => {
+  const response = test('handler').get();
+
+  assert.equal(response.status, 200);
+})
+----
+
+== API
+
+=== `test`
+
+The top level test method sets up the method that you want to
+
+== Install
+
+== Acknowledgements
+
+== See Also
+
+== License
+
+// vim: set syntax=asciidoc:

@@ -1,0 +1,20 @@
+{
+  "name": "serverless_testing_library",
+  "description": "serverless_testing_library is a small library to make integration or smoke testing your API's easier.",
+  "version": "0.0.0",
+  "keywords": [
+    "serverless",
+    "API",
+    "testing",
+    "aws",
+    "mocha",
+    "jest"
+  ],
+  "homepage": "https://github.com/janders223/serverless_testing_library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
