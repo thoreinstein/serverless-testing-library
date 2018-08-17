@@ -1,7 +1,5 @@
 == serverless_testing_library
 ifdef::env-github[]
-:imagesdir:
- https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :important-caption: :heavy_exclamation_mark:
@@ -41,7 +39,29 @@ it('gets a 200 response', async () => {
 
 === `test`
 
-The top level test method sets up the method that you want to
+The top level test method sets up the method that you want to test
+
+[source,javascript]
+----
+const endpoint = test('handler');
+----
+
+The handler string is the handler name as defined in your `functions` object `serverless.yml`.
+
+Given:
+[source,yaml]
+----
+functions:
+  getUsers:
+    handler: src/handler.getUsers
+----
+
+Your test setup would look like this:
+
+[source,javascript]
+----
+const endpoint = test('getUsers')
+----
 
 == Install
 
