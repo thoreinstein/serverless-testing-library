@@ -1,7 +1,7 @@
 {
-  "name": "serverless-testing-library",
-  "description": "serverless-testing-library is a small library to make integration or smoke testing your API's easier.",
-  "version": "0.0.0",
+  "name": "serverless_testing_library",
+  "description": "serverless_testing_library is a small library to make integration or smoke testing your API's easier.",
+  "version": "0.0.0-alpha",
   "keywords": [
     "serverless",
     "API",
