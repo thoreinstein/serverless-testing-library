@@ -8,6 +8,9 @@ test
 .prettierrc
 commitlint.config.js
 Makefile
-tsconfig.json
-tslint.json
 yarn.lock
+.eslintrc
+mock/*
+src/__mocks__/*
+src/__test__/*
+serverless.yml
