@@ -18,16 +18,10 @@
   "bugs": {
     "url": "https://github.com/janders223/serverless_testing_library/issues"
   },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
     "commitmsg": "commitlint -E GIT_PARAMS",
-    "docs": "typedoc --out docs/ src/**/*.ts",
-    "lint": "tslint src/**/*.ts",
-    "lint:ci": "tslint -o results/tslint/results.xml --formatters-dir node_modules/tslint-junit-formatter/formatters --format junit src/**/*.ts",
-    "lint:fix": "npm run lint -- --fix && npx prettier src/**/*.ts --write",
+    "lint": "eslint src/**/*.ts",
     "semantic-release": "semantic-release",
     "test": "NODE_ENV=test jest",
     "test:ci": "NODE_ENV=test jest --ci --coverage"
@@ -37,49 +31,25 @@
     "email": "jim@janders223.com"
   },
   "license": "MIT",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "express": "4.16.4",
+    "js-yaml": "3.12.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
-    "@types/jest": "23.3.5",
-    "@types/node": "^10.5.2",
+    "eslint": "5.7.0",
+    "eslint-config-prettier": "3.1.0",
+    "eslint-plugin-prettier": "3.0.0",
     "husky": "1.1.2",
     "jest": "23.6.0",
-    "jest-junit": "^5.1.0",
-    "prettier": "^1.14.2",
-    "rimraf": "^2.6.2",
-    "semantic-release": "^15.9.8",
-    "ts-jest": "23.10.4",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.14.0",
-    "tslint-junit-formatter": "^5.1.0",
-    "typescript": "^3.0.1"
+    "prettier": "1.14.3",
+    "semantic-release": "^15.9.8"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  },
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "skipBabel": true
-      }
-    },
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }

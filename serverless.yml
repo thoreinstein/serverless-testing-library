@@ -1,0 +1,37 @@
+service: user
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  new:
+    handler: mock/user.new
+    events:
+      - http:
+          path: users
+          method: post
+  index:
+    handler: mock/user.list
+    events:
+      - http:
+          path: users
+          method: get
+  show:
+    handler: mock/user.show
+    events:
+      - http:
+          path: users/{id}
+          method: get
+  update:
+    handler: mock/user.update
+    events:
+      - http:
+          path: users/{id}
+          method: put
+  delete:
+    handler: mock/user.delete
+    events:
+      - http:
+          path: users/{id}
+          method: delete
