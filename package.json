@@ -1,7 +1,7 @@
 {
   "name": "serverless-testing-library",
   "description": "serverless-testing-library is a small library to make integration or smoke testing your API's easier.",
-  "version": "0.0.0-alpha",
+  "version": "0.0.0-development",
   "keywords": [
     "serverless",
     "API",
@@ -24,7 +24,8 @@
     "lint": "eslint src/**/*.js",
     "semantic-release": "semantic-release",
     "test": "NODE_ENV=test jest",
-    "test:ci": "NODE_ENV=test jest --ci --coverage"
+    "test:ci": "NODE_ENV=test jest --ci --coverage",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "author": {
     "name": "Jim Anders",
@@ -50,7 +51,8 @@
     "jest": "23.6.0",
     "lint-staged": "7.3.0",
     "prettier": "1.14.3",
-    "semantic-release": "^15.9.8"
+    "semantic-release": "^15.10.3",
+    "travis-deploy-once": "^5.0.9"
   },
   "husky": {
     "hooks": {
