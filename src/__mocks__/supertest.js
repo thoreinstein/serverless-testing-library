@@ -12,8 +12,23 @@ const get = jest.fn().mockReturnValue(
   })
 )
 
+const post = jest.fn().mockReturnValue({
+  send: jest.fn().mockReturnValue(
+    new Promise(resolve => {
+      resolve({
+        status: 200,
+        headers: {},
+        body: JSON.stringify({
+          user: { id: 1, name: 'Jon' },
+        }),
+      })
+    })
+  ),
+})
+
 const foo = () => {
   this.get = get
+  this.post = post
   this.set = jest.fn()
 
   return this

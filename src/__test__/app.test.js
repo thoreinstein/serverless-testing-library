@@ -1,8 +1,8 @@
 const createApp = require('../app')
-const { resolve } = require('path')
-const { readFileSync } = require('fs')
 const supertest = require('supertest')()
 const { inspect } = require('util')
+const { readFileSync } = require('fs')
+const { resolve } = require('path')
 
 jest.mock('supertest')
 
@@ -56,6 +56,61 @@ describe('createApp', () => {
       expect(response.headers).toEqual({})
       expect(response.body).toEqual({
         users: [{ id: 1, name: 'Jon' }, { id: 2, name: 'Jane' }],
+      })
+    })
+  })
+
+  describe('post()', () => {
+    it('performs a post request', async () => {
+      await app.post('/users', {
+        data: {
+          name: 'Jon',
+        },
+      })
+
+      expect(supertest.post).toHaveBeenCalledWith('/users')
+      expect(supertest.post().send).toHaveBeenCalledWith({ name: 'Jon' })
+    })
+
+    it('correctly sets headers', async () => {
+      await app.post('/users', {
+        data: {},
+        headers: {
+          'x-api-key': 'foobar',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+    })
+
+    it('correctly sets multiple headers', async () => {
+      await app.post('/users', {
+        data: {},
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+    })
+
+    it('returns a properly formatted response', async () => {
+      const response = await app.post('/users', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(response.status).toBe(200)
+      expect(response.headers).toEqual({})
+      expect(response.body).toEqual({
+        user: { id: 1, name: 'Jon' },
       })
     })
   })

@@ -34,7 +34,7 @@ const configureServer = config => {
         body: JSON.stringify(req.body),
         resource: '',
         stagevariables: {},
-        requestcontext: {}
+        requestcontext: {},
       }
 
       const response = await handler(event)
@@ -65,30 +65,46 @@ const get = server => {
       resolve({
         status: response.status,
         headers: response.headers,
-        body: JSON.parse(response.body)
+        body: JSON.parse(response.body),
       })
     })
   }
 }
 
-const del = path => {
+const post = server => {
+  return (path, options = {}) => {
+    const req = request(server)
+    const { data, headers } = options
+    return new Promise(async (resolve, reject) => {
+      if (headers) {
+        for (let header in headers) {
+          req.set(header, headers[header])
+        }
+      }
+
+      const response = await req.post(path).send({ ...data })
+
+      resolve({
+        status: response.status,
+        headers: response.headers,
+        body: JSON.parse(response.body),
+      })
+    })
+  }
 }
 
-const post = path => {
-}
+const del = server => {}
 
-const put = path => {
-}
+const put = path => {}
 
-const patch = path => {
-}
+const patch = path => {}
 
 module.exports = config => {
   const server = configureServer(config)
 
   return {
     get: get(server),
-    post,
+    post: post(server),
     put,
     patch,
     delete: del,
