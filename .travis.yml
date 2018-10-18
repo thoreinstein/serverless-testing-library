@@ -6,14 +6,18 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
 node_js:
-  - "8"
+  - '8'
 script: npm run test:ci
 after_script:
   - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - npx travis-deploy-once "npx semantic-release"
+after_success:
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

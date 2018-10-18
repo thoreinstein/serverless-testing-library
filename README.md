@@ -71,7 +71,7 @@ Jest users are not left out: `serverless-testing-library` also ships with the sa
 ```javascript
 // test.setup.js
 
-const stl = require('serverless-testing-library/jest')
+require('serverless-testing-library/jest')
 ```
 
 Then configure jest to use the above setup script in either the `jest` key of `package.json` or `jest.config.js`:
