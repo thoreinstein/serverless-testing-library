@@ -97,7 +97,7 @@ expect(response).toBeJson()
 
 ## License
 
-See `[LICENSE]`
+See [`LICENSE`]
 
 [serverless]: https://serverless.com/
 [express]: https://expressjs.com/
