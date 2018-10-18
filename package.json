@@ -23,8 +23,8 @@
     "commitmsg": "commitlint -E GIT_PARAMS",
     "lint": "eslint src/**/*.js",
     "semantic-release": "semantic-release",
-    "test": "NODE_ENV=test jest",
-    "test:ci": "NODE_ENV=test jest --ci --coverage",
+    "test": "CI=TRAVIS NODE_ENV=test jest",
+    "test:ci": "CI=TRAVIS NODE_ENV=test jest --ci --coverage",
     "travis-deploy-once": "travis-deploy-once"
   },
   "author": {
