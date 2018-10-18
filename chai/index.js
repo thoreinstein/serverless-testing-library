@@ -14,25 +14,12 @@ module.exports = chai => {
   }
 
   Assertion.addMethod('status', code => {
-    const hasStatus = Object.keys(this._obj).include('status')
-
-    new Assertion(hasStatus).assert(
-      hasStatus,
-      "expected #{act} to have key 'status'",
-      null,
-      hasStatus,
-      this._obj,
-      false
-    )
-
-    var status = this._obj.status
-
     this.assert(
-      status == code,
+      this._obj.status == code,
       'expected #{this} to have status code #{exp} but got #{act}',
       'expected #{this} to not have status code #{act}',
       code,
-      status
+      this._obj.status
     )
   })
 

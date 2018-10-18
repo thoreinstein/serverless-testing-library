@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matchers toBeJson prints the correct message if fail 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toBeJson([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"text/plain\\"[39m to be 'application/json'"
+`;
+
+exports[`matchers toHaveHeader prints the correct message for key matches 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toHaveHeader([22m[32mexpected[39m[2m)[22m
+
+Expected: [31m{\\"x-foo-bar\\": \\"foo\\"}[39m
+To contain header [32m[\\"x-api-key\\"][39m
+"
+`;
+
+exports[`matchers toHaveHeader prints the correct message for key, value matches 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toHaveHeader([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"x-api-key\\"[39m:[32m\\"foo\\"[39m
+Received: [31m\\"x-api-key\\"[39m:[32mundefined[39m
+"
+`;
+
+exports[`matchers toHaveStatus should have the correct message if it fails 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toHaveStatus([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m200[39m
+Received: [31m204[39m
+"
+`;
