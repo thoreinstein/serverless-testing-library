@@ -26,14 +26,27 @@ const post = jest.fn().mockReturnValue({
   ),
 })
 
-const foo = () => {
+const del = jest.fn().mockReturnValue(
+  new Promise(resolve => {
+    resolve({
+      status: 200,
+      headers: {},
+      body: JSON.stringify({
+        user: { id: 1, status: 'deleted' },
+      }),
+    })
+  })
+)
+
+const test = () => {
   this.get = get
   this.post = post
+  this.delete = del
   this.set = jest.fn()
 
   return this
 }
 
-supertest = foo
+supertest = test
 
 module.exports = supertest

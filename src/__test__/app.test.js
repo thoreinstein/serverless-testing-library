@@ -114,4 +114,49 @@ describe('createApp', () => {
       })
     })
   })
+
+  describe('delete()', () => {
+    it('performs a delete request', async () => {
+      await app.delete('/users/1')
+
+      expect(supertest.delete).toHaveBeenCalledWith('/users/1')
+    })
+
+    it('correctly sets headers', async () => {
+      await app.delete('/users/1', {
+        headers: {
+          'x-api-key': 'foobar',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+    })
+
+    it('correctly sets multiple headers', async () => {
+      await app.delete('/users/1', {
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+    })
+
+    it('returns a properly formatted response', async () => {
+      const response = await app.delete('/users/1', {
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(response.status).toBe(200)
+      expect(response.headers).toEqual({})
+      expect(response.body).toEqual({
+        user: { id: 1, status: 'deleted' },
+      })
+    })
+  })
 })

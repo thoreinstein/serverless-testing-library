@@ -29,7 +29,7 @@ const configureServer = config => {
         headers: req.headers,
         path: req.url,
         httpmethod: req.method,
-        pathparams: req.params,
+        pathParameters: req.params,
         querystringparameters: req.query,
         body: JSON.stringify(req.body),
         resource: '',
@@ -93,7 +93,27 @@ const post = server => {
   }
 }
 
-const del = server => {}
+const del = server => {
+  return (path, options = {}) => {
+    const req = request(server)
+    const { headers } = options
+    return new Promise(async (resolve, reject) => {
+      if (headers) {
+        for (let header in headers) {
+          req.set(header, headers[header])
+        }
+      }
+
+      const response = await req.delete(path)
+
+      resolve({
+        status: response.status,
+        headers: response.headers,
+        body: JSON.parse(response.body),
+      })
+    })
+  }
+}
 
 const put = path => {}
 
@@ -107,6 +127,6 @@ module.exports = config => {
     post: post(server),
     put,
     patch,
-    delete: del,
+    delete: del(server),
   }
 }
