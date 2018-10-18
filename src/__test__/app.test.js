@@ -159,4 +159,122 @@ describe('createApp', () => {
       })
     })
   })
+
+  describe('patch()', () => {
+    it('performs a patch request', async () => {
+      await app.patch('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+      })
+
+      expect(supertest.patch).toHaveBeenCalledWith('/users/1')
+      expect(supertest.patch().send).toHaveBeenCalledWith({ name: 'Jon' })
+    })
+
+    it('correctly sets headers', async () => {
+      await app.patch('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+    })
+
+    it('correctly sets multiple headers', async () => {
+      await app.patch('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+    })
+
+    it('returns a properly formatted response', async () => {
+      const response = await app.patch('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(response.status).toBe(200)
+      expect(response.headers).toEqual({})
+      expect(response.body).toEqual({
+        user: { id: 1, name: 'Jon' },
+      })
+    })
+  })
+
+  describe('put()', () => {
+    it('performs a put request', async () => {
+      await app.put('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+      })
+
+      expect(supertest.put).toHaveBeenCalledWith('/users/1')
+      expect(supertest.put().send).toHaveBeenCalledWith({ name: 'Jon' })
+    })
+
+    it('correctly sets headers', async () => {
+      await app.put('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+    })
+
+    it('correctly sets multiple headers', async () => {
+      await app.put('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+    })
+
+    it('returns a properly formatted response', async () => {
+      const response = await app.put('/users/1', {
+        data: {
+          name: 'Jon',
+        },
+        headers: {
+          'x-api-key': 'foobar',
+          'Content-Type': 'application/json',
+        },
+      })
+
+      expect(response.status).toBe(200)
+      expect(response.headers).toEqual({})
+      expect(response.body).toEqual({
+        user: { id: 1, name: 'Jon' },
+      })
+    })
+  })
 })

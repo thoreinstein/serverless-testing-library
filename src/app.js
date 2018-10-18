@@ -93,6 +93,50 @@ const post = server => {
   }
 }
 
+const patch = server => {
+  return (path, options = {}) => {
+    const req = request(server)
+    const { data, headers } = options
+    return new Promise(async (resolve, reject) => {
+      if (headers) {
+        for (let header in headers) {
+          req.set(header, headers[header])
+        }
+      }
+
+      const response = await req.patch(path).send({ ...data })
+
+      resolve({
+        status: response.status,
+        headers: response.headers,
+        body: JSON.parse(response.body),
+      })
+    })
+  }
+}
+
+const put = server => {
+  return (path, options = {}) => {
+    const req = request(server)
+    const { data, headers } = options
+    return new Promise(async (resolve, reject) => {
+      if (headers) {
+        for (let header in headers) {
+          req.set(header, headers[header])
+        }
+      }
+
+      const response = await req.put(path).send({ ...data })
+
+      resolve({
+        status: response.status,
+        headers: response.headers,
+        body: JSON.parse(response.body),
+      })
+    })
+  }
+}
+
 const del = server => {
   return (path, options = {}) => {
     const req = request(server)
@@ -115,18 +159,14 @@ const del = server => {
   }
 }
 
-const put = path => {}
-
-const patch = path => {}
-
 module.exports = config => {
   const server = configureServer(config)
 
   return {
     get: get(server),
     post: post(server),
-    put,
-    patch,
+    put: put(server),
+    patch: patch(server),
     delete: del(server),
   }
 }

@@ -26,6 +26,34 @@ const post = jest.fn().mockReturnValue({
   ),
 })
 
+const patch = jest.fn().mockReturnValue({
+  send: jest.fn().mockReturnValue(
+    new Promise(resolve => {
+      resolve({
+        status: 200,
+        headers: {},
+        body: JSON.stringify({
+          user: { id: 1, name: 'Jon' },
+        }),
+      })
+    })
+  ),
+})
+
+const put = jest.fn().mockReturnValue({
+  send: jest.fn().mockReturnValue(
+    new Promise(resolve => {
+      resolve({
+        status: 200,
+        headers: {},
+        body: JSON.stringify({
+          user: { id: 1, name: 'Jon' },
+        }),
+      })
+    })
+  ),
+})
+
 const del = jest.fn().mockReturnValue(
   new Promise(resolve => {
     resolve({
@@ -42,6 +70,8 @@ const test = () => {
   this.get = get
   this.post = post
   this.delete = del
+  this.patch = patch
+  this.put = put
   this.set = jest.fn()
 
   return this
