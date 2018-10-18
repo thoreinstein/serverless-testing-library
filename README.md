@@ -1,7 +1,8 @@
 # serverless-testing-library
 
 [![Build Status](https://travis-ci.com/janders223/serverless_testing_library.svg?branch=master)](https://travis-ci.com/janders223/serverless_testing_library)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/80168f8cd1574e9bae26da8bb62d4414)](https://www.codacy.com/app/janders223/serverless-testing-library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=janders223/serverless_testing_library&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/maintainability)](https://codeclimate.com/github/janders223/serverless_testing_library/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/test_coverage)](https://codeclimate.com/github/janders223/serverless_testing_library/test_coverage)
 
 `serverless_testing_library` is a small library to make integration or smoke testing your [https://serverless.com]() API’s easier.
 
@@ -12,12 +13,12 @@ A simple request.
 ```javascript
 const test = require(‘serverless-testing-library’);
 
-it(‘gets a 200 response’, async () => { 
+it(‘gets a 200 response’, async () => {
   const app = test()
-  
+
   const response = await app.get('/')
 
-  assert.equal(response.status, 200) 
+  assert.equal(response.status, 200)
   assert.equal(response.body.foo, 'bar')
 })
 ```
@@ -29,7 +30,7 @@ Here, we import the top-level function test from `serverless-testing-library` an
 The `test` method takes an optional parameter of the path in which your serverless definition file lives.
 
 ```javascript
-const app = test('my_api.yml')  // resolves <project_root>/my_api.yml
+const app = test('my_api.yml') // resolves <project_root>/my_api.yml
 const app = test('foo/api.yml') // resolves <project_root>/foo/api.yml
 ```
 
