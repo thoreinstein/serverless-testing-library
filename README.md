@@ -97,7 +97,7 @@ expect(response).toBeJson()
 
 ## License
 
-See [`LICENSE`]
+See [`LICENSE`](https://github.com/janders223/serverless-testing-library/blob/master/LICENSE)
 
 [serverless]: https://serverless.com/
 [express]: https://expressjs.com/
@@ -106,4 +106,3 @@ See [`LICENSE`]
 [chai]: https://www.chaijs.com/
 [chai-http]: http://www.chaijs.com/plugins/chai-http/
 [react-testing-library]: https://github.com/kentcdodds/react-testing-library
-[license]: https://github.com/janders223/serverless-testing-library/blob/master/LICENSE
