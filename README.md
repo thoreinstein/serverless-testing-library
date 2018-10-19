@@ -45,6 +45,8 @@ const filePath = path.resolve(process.cwd(), '../other-project/serverless.yml')
 const app = test(filePath)
 ```
 
+You can find the complete API documentation [here].
+
 ## Chai Assertions
 
 For those using [mocha] and [chai] to test their API's, `serverless-testing-library` ships with a simple set of chai assertions.
@@ -106,3 +108,4 @@ See [`LICENSE`](https://github.com/janders223/serverless-testing-library/blob/ma
 [chai]: https://www.chaijs.com/
 [chai-http]: http://www.chaijs.com/plugins/chai-http/
 [react-testing-library]: https://github.com/kentcdodds/react-testing-library
+[here]: https://github.com/janders223/serverless-testing-library/blob/master/API.md
