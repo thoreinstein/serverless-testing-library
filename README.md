@@ -1,6 +1,6 @@
 # serverless-testing-library
 
-[![Build Status](https://travis-ci.com/janders223/serverless_testing_library.svg?branch=master)](https://travis-ci.com/janders223/serverless_testing_library)
+[![Build Status](https://travis-ci.com/janders223/serverless-testing-library.svg?branch=master)](https://travis-ci.com/janders223/serverless-testing-library)
 [![Maintainability](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/maintainability)](https://codeclimate.com/github/janders223/serverless_testing_library/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/test_coverage)](https://codeclimate.com/github/janders223/serverless_testing_library/test_coverage)
 
