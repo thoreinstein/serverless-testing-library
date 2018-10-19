@@ -37,12 +37,21 @@ const configureServer = config => {
         requestcontext: {},
       }
 
-      const response = await handler(event)
+      const callback = (err, result) => {
+        if (err) {
+          res
+            .status(500)
+            .set(err.headers)
+            .send(err)
+          return
+        }
+        res
+          .status(result.statusCode)
+          .set(result.headers)
+          .send(result.body)
+      }
 
-      res
-        .set({ ...response.headers })
-        .status(response.statusCode)
-        .json(response.body)
+      handler(event, {}, callback)
     })
   })
 
@@ -51,21 +60,24 @@ const configureServer = config => {
 
 const get = server => {
   return (path, options = {}) => {
-    const req = request(server)
+    let req = request(server)
     const { headers } = options
 
     return new Promise(async (resolve, reject) => {
+      req = req.get(path)
+
       if (headers) {
         for (let header in headers) {
           req.set(header, headers[header])
         }
       }
 
-      const response = await req.get(path)
+      const response = await req
+
       resolve({
         status: response.status,
         headers: response.headers,
-        body: JSON.parse(response.body),
+        body: response.body,
       })
     })
   }
@@ -73,21 +85,24 @@ const get = server => {
 
 const post = server => {
   return (path, options = {}) => {
-    const req = request(server)
+    let req = request(server)
     const { data, headers } = options
+
     return new Promise(async (resolve, reject) => {
+      req = req.post(path)
+
       if (headers) {
         for (let header in headers) {
           req.set(header, headers[header])
         }
       }
 
-      const response = await req.post(path).send({ ...data })
+      const response = await req.send({ ...data })
 
       resolve({
         status: response.status,
         headers: response.headers,
-        body: JSON.parse(response.body),
+        body: response.body,
       })
     })
   }
@@ -95,16 +110,19 @@ const post = server => {
 
 const patch = server => {
   return (path, options = {}) => {
-    const req = request(server)
+    let req = request(server)
     const { data, headers } = options
+
     return new Promise(async (resolve, reject) => {
+      req = req.patch(path)
+
       if (headers) {
         for (let header in headers) {
           req.set(header, headers[header])
         }
       }
 
-      const response = await req.patch(path).send({ ...data })
+      const response = await req.send({ ...data })
 
       resolve({
         status: response.status,
@@ -117,16 +135,19 @@ const patch = server => {
 
 const put = server => {
   return (path, options = {}) => {
-    const req = request(server)
+    let req = request(server)
     const { data, headers } = options
+
     return new Promise(async (resolve, reject) => {
+      req = req.put(path)
+
       if (headers) {
         for (let header in headers) {
           req.set(header, headers[header])
         }
       }
 
-      const response = await req.put(path).send({ ...data })
+      const response = await req.send({ ...data })
 
       resolve({
         status: response.status,
@@ -139,16 +160,19 @@ const put = server => {
 
 const del = server => {
   return (path, options = {}) => {
-    const req = request(server)
+    let req = request(server)
     const { headers } = options
+
     return new Promise(async (resolve, reject) => {
+      req = req.delete(path)
+
       if (headers) {
         for (let header in headers) {
           req.set(header, headers[header])
         }
       }
 
-      const response = await req.delete(path)
+      const response = await req
 
       resolve({
         status: response.status,

@@ -1,16 +1,21 @@
 let supertest = jest.genMockFromModule('supertest')
 
-const get = jest.fn().mockReturnValue(
-  new Promise(resolve => {
-    resolve({
-      status: 200,
-      headers: {},
-      body: JSON.stringify({
-        users: [{ id: 1, name: 'Jon' }, { id: 2, name: 'Jane' }],
-      }),
-    })
+const get = jest
+  .fn()
+  .mockImplementationOnce({
+    set: jest.fn(),
   })
-)
+  .mockImplementationOnce(
+    new Promise(resolve => {
+      resolve({
+        status: 200,
+        headers: {},
+        body: JSON.stringify({
+          users: [{ id: 1, name: 'Jon' }, { id: 2, name: 'Jane' }],
+        }),
+      })
+    })
+  )
 
 const post = jest.fn().mockReturnValue({
   send: jest.fn().mockReturnValue(
