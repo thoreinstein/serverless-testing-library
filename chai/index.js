@@ -13,7 +13,7 @@ module.exports = chai => {
     if (obj.headers) return obj.headers[key]
   }
 
-  Assertion.addMethod('status', code => {
+  Assertion.addMethod('status', function(code) {
     this.assert(
       this._obj.status == code,
       'expected #{this} to have status code #{exp} but got #{act}',
