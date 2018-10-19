@@ -16,23 +16,23 @@ describe('createApp', () => {
   })
 
   describe('get()', () => {
-    it.skip('performs a get request', async () => {
+    it('performs a get request', async () => {
       await app.get('/users')
 
       expect(supertest.get).toHaveBeenCalledWith('/users')
     })
 
-    it.skip('correctly sets headers', async () => {
+    it('correctly sets headers', async () => {
       await app.get('/users', {
         headers: {
           'x-api-key': 'foobar',
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.get().set).toHaveBeenCalledWith({ 'x-api-key': 'foobar' })
     })
 
-    it.skip('correctly sets multiple headers', async () => {
+    it('correctly sets multiple headers', async () => {
       await app.get('/users', {
         headers: {
           'x-api-key': 'foobar',
@@ -40,11 +40,13 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.get().set).toHaveBeenCalledWith({
+        'x-api-key': 'foobar',
+        'Content-Type': 'application/json',
+      })
     })
 
-    it.skip('returns a properly formatted response', async () => {
+    it('returns a properly formatted response', async () => {
       const response = await app.get('/users', {
         headers: {
           'x-api-key': 'foobar',
@@ -61,7 +63,7 @@ describe('createApp', () => {
   })
 
   describe('post()', () => {
-    it.skip('performs a post request', async () => {
+    it('performs a post request', async () => {
       await app.post('/users', {
         data: {
           name: 'Jon',
@@ -72,7 +74,7 @@ describe('createApp', () => {
       expect(supertest.post().send).toHaveBeenCalledWith({ name: 'Jon' })
     })
 
-    it.skip('correctly sets headers', async () => {
+    it('correctly sets headers', async () => {
       await app.post('/users', {
         data: {},
         headers: {
@@ -80,10 +82,10 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.post().set).toHaveBeenCalledWith('x-api-key', 'foobar')
     })
 
-    it.skip('correctly sets multiple headers', async () => {
+    it('correctly sets multiple headers', async () => {
       await app.post('/users', {
         data: {},
         headers: {
@@ -92,11 +94,11 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.post().set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.post().set).toHaveBeenCalledWith('Content-Type', 'application/json')
     })
 
-    it.skip('returns a properly formatted response', async () => {
+    it('returns a properly formatted response', async () => {
       const response = await app.post('/users', {
         data: {
           name: 'Jon',
@@ -116,23 +118,23 @@ describe('createApp', () => {
   })
 
   describe('delete()', () => {
-    it.skip('performs a delete request', async () => {
+    it('performs a delete request', async () => {
       await app.delete('/users/1')
 
       expect(supertest.delete).toHaveBeenCalledWith('/users/1')
     })
 
-    it.skip('correctly sets headers', async () => {
+    it('correctly sets headers', async () => {
       await app.delete('/users/1', {
         headers: {
           'x-api-key': 'foobar',
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.delete().set).toHaveBeenCalledWith({ 'x-api-key': 'foobar' })
     })
 
-    it.skip('correctly sets multiple headers', async () => {
+    it('correctly sets multiple headers', async () => {
       await app.delete('/users/1', {
         headers: {
           'x-api-key': 'foobar',
@@ -140,11 +142,13 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.delete().set).toHaveBeenCalledWith({
+        'x-api-key': 'foobar',
+        'Content-Type': 'application/json',
+      })
     })
 
-    it.skip('returns a properly formatted response', async () => {
+    it('returns a properly formatted response', async () => {
       const response = await app.delete('/users/1', {
         headers: {
           'x-api-key': 'foobar',
@@ -161,7 +165,7 @@ describe('createApp', () => {
   })
 
   describe('patch()', () => {
-    it.skip('performs a patch request', async () => {
+    it('performs a patch request', async () => {
       await app.patch('/users/1', {
         data: {
           name: 'Jon',
@@ -169,10 +173,10 @@ describe('createApp', () => {
       })
 
       expect(supertest.patch).toHaveBeenCalledWith('/users/1')
-      expect(supertest.patch().send).toHaveBeenCalledWith({ name: 'Jon' })
+      expect(supertest.patch().set().send).toHaveBeenCalledWith({ name: 'Jon' })
     })
 
-    it.skip('correctly sets headers', async () => {
+    it('correctly sets headers', async () => {
       await app.patch('/users/1', {
         data: {
           name: 'Jon',
@@ -182,10 +186,10 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.patch().set).toHaveBeenCalledWith({ 'x-api-key': 'foobar' })
     })
 
-    it.skip('correctly sets multiple headers', async () => {
+    it('correctly sets multiple headers', async () => {
       await app.patch('/users/1', {
         data: {
           name: 'Jon',
@@ -196,11 +200,13 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.patch().set).toHaveBeenCalledWith({
+        'x-api-key': 'foobar',
+        'Content-Type': 'application/json',
+      })
     })
 
-    it.skip('returns a properly formatted response', async () => {
+    it('returns a properly formatted response', async () => {
       const response = await app.patch('/users/1', {
         data: {
           name: 'Jon',
@@ -220,7 +226,7 @@ describe('createApp', () => {
   })
 
   describe('put()', () => {
-    it.skip('performs a put request', async () => {
+    it('performs a put request', async () => {
       await app.put('/users/1', {
         data: {
           name: 'Jon',
@@ -228,10 +234,10 @@ describe('createApp', () => {
       })
 
       expect(supertest.put).toHaveBeenCalledWith('/users/1')
-      expect(supertest.put().send).toHaveBeenCalledWith({ name: 'Jon' })
+      expect(supertest.put().set().send).toHaveBeenCalledWith({ name: 'Jon' })
     })
 
-    it.skip('correctly sets headers', async () => {
+    it('correctly sets headers', async () => {
       await app.put('/users/1', {
         data: {
           name: 'Jon',
@@ -241,10 +247,10 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.put().set).toHaveBeenCalledWith({ 'x-api-key': 'foobar' })
     })
 
-    it.skip('correctly sets multiple headers', async () => {
+    it('correctly sets multiple headers', async () => {
       await app.put('/users/1', {
         data: {
           name: 'Jon',
@@ -255,11 +261,13 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.put().set).toHaveBeenCalledWith({
+        'x-api-key': 'foobar',
+        'Content-Type': 'application/json',
+      })
     })
 
-    it.skip('returns a properly formatted response', async () => {
+    it('returns a properly formatted response', async () => {
       const response = await app.put('/users/1', {
         data: {
           name: 'Jon',

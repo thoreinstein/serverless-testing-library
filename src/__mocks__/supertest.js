@@ -1,11 +1,7 @@
 let supertest = jest.genMockFromModule('supertest')
 
-const get = jest
-  .fn()
-  .mockImplementationOnce({
-    set: jest.fn(),
-  })
-  .mockImplementationOnce(
+const get = jest.fn().mockReturnValue({
+  set: jest.fn().mockReturnValue(
     new Promise(resolve => {
       resolve({
         status: 200,
@@ -15,9 +11,11 @@ const get = jest
         }),
       })
     })
-  )
+  ),
+})
 
 const post = jest.fn().mockReturnValue({
+  set: jest.fn().mockReturnValue(this),
   send: jest.fn().mockReturnValue(
     new Promise(resolve => {
       resolve({
@@ -32,44 +30,50 @@ const post = jest.fn().mockReturnValue({
 })
 
 const patch = jest.fn().mockReturnValue({
-  send: jest.fn().mockReturnValue(
-    new Promise(resolve => {
-      resolve({
-        status: 200,
-        headers: {},
-        body: JSON.stringify({
-          user: { id: 1, name: 'Jon' },
-        }),
+  set: jest.fn().mockReturnValue({
+    send: jest.fn().mockReturnValue(
+      new Promise(resolve => {
+        resolve({
+          status: 200,
+          headers: {},
+          body: JSON.stringify({
+            user: { id: 1, name: 'Jon' },
+          }),
+        })
       })
-    })
-  ),
+    ),
+  }),
 })
 
 const put = jest.fn().mockReturnValue({
-  send: jest.fn().mockReturnValue(
+  set: jest.fn().mockReturnValue({
+    send: jest.fn().mockReturnValue(
+      new Promise(resolve => {
+        resolve({
+          status: 200,
+          headers: {},
+          body: JSON.stringify({
+            user: { id: 1, name: 'Jon' },
+          }),
+        })
+      })
+    ),
+  }),
+})
+
+const del = jest.fn().mockReturnValue({
+  set: jest.fn().mockReturnValue(
     new Promise(resolve => {
       resolve({
         status: 200,
         headers: {},
         body: JSON.stringify({
-          user: { id: 1, name: 'Jon' },
+          user: { id: 1, status: 'deleted' },
         }),
       })
     })
   ),
 })
-
-const del = jest.fn().mockReturnValue(
-  new Promise(resolve => {
-    resolve({
-      status: 200,
-      headers: {},
-      body: JSON.stringify({
-        user: { id: 1, status: 'deleted' },
-      }),
-    })
-  })
-)
 
 const test = () => {
   this.get = get
@@ -77,7 +81,6 @@ const test = () => {
   this.delete = del
   this.patch = patch
   this.put = put
-  this.set = jest.fn()
 
   return this
 }
