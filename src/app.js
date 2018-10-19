@@ -48,10 +48,19 @@ const configureServer = config => {
         res
           .status(result.statusCode)
           .set(result.headers)
-          .send(result.body)
+          .send(JSON.stringify(result.body))
       }
 
-      handler(event, {}, callback)
+      if (handler.length > 2) {
+        return handler(event, {}, callback)
+      }
+
+      const response = await handler(event)
+
+      res
+        .set({ ...response.headers })
+        .status(response.statusCode)
+        .json(response.body)
     })
   })
 
@@ -60,24 +69,17 @@ const configureServer = config => {
 
 const get = server => {
   return (path, options = {}) => {
-    let req = request(server)
     const { headers } = options
 
     return new Promise(async (resolve, reject) => {
-      req = req.get(path)
-
-      if (headers) {
-        for (let header in headers) {
-          req.set(header, headers[header])
-        }
-      }
-
-      const response = await req
+      const response = await request(server)
+        .get(path)
+        .set(headers)
 
       resolve({
         status: response.status,
         headers: response.headers,
-        body: response.body,
+        body: JSON.parse(response.body),
       })
     })
   }
@@ -102,7 +104,7 @@ const post = server => {
       resolve({
         status: response.status,
         headers: response.headers,
-        body: response.body,
+        body: JSON.parse(response.body),
       })
     })
   }
@@ -110,19 +112,13 @@ const post = server => {
 
 const patch = server => {
   return (path, options = {}) => {
-    let req = request(server)
     const { data, headers } = options
 
     return new Promise(async (resolve, reject) => {
-      req = req.patch(path)
-
-      if (headers) {
-        for (let header in headers) {
-          req.set(header, headers[header])
-        }
-      }
-
-      const response = await req.send({ ...data })
+      const response = await request(server)
+        .patch(path)
+        .set(headers)
+        .send({ ...data })
 
       resolve({
         status: response.status,
@@ -135,19 +131,14 @@ const patch = server => {
 
 const put = server => {
   return (path, options = {}) => {
-    let req = request(server)
     const { data, headers } = options
 
     return new Promise(async (resolve, reject) => {
-      req = req.put(path)
+      const response = await request(server)
+        .put(path)
 
-      if (headers) {
-        for (let header in headers) {
-          req.set(header, headers[header])
-        }
-      }
-
-      const response = await req.send({ ...data })
+        .set(headers)
+        .send({ ...data })
 
       resolve({
         status: response.status,
@@ -160,19 +151,12 @@ const put = server => {
 
 const del = server => {
   return (path, options = {}) => {
-    let req = request(server)
     const { headers } = options
 
     return new Promise(async (resolve, reject) => {
-      req = req.delete(path)
-
-      if (headers) {
-        for (let header in headers) {
-          req.set(header, headers[header])
-        }
-      }
-
-      const response = await req
+      const response = await request(server)
+        .delete(path)
+        .set(headers)
 
       resolve({
         status: response.status,
