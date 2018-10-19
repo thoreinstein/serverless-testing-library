@@ -1,8 +1,9 @@
 # serverless-testing-library
 
-[![Build Status](https://travis-ci.com/janders223/serverless-testing-library.svg?branch=master)](https://travis-ci.com/janders223/serverless-testing-library)
-[![Maintainability](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/maintainability)](https://codeclimate.com/github/janders223/serverless_testing_library/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/962b8a5f4766a6269bee/test_coverage)](https://codeclimate.com/github/janders223/serverless_testing_library/test_coverage)
+[![npm](https://img.shields.io/npm/v/serverless-testing-library.svg?style=for-the-badge)](https://www.npmjs.com/package/serverless-testing-library)
+[![Travis (.com)](https://img.shields.io/travis/com/janders223/serverless-testing-library.svg?style=for-the-badge)](https://travis-ci.com/janders223/serverless-testing-library)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/angular/angular.js.svg?style=for-the-badge)](https://codeclimate.com/janders223/serverless_testing_library)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/janders223/serverless_testing_library.svg?style=for-the-badge)](https://codeclimate.com/github/janders223/serverless_testing_library)
 
 `serverless-testing-library` makes it easier to write integration and smoke tests for your [serverless] APIs.
 
