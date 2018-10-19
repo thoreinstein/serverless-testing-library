@@ -35,15 +35,15 @@ module.exports = chai => {
     } else if (arguments[1] instanceof RegExp) {
       this.assert(
         value.test(header),
-        "expected header '" + key + "' to match " + value + ' but got ' + i(header),
-        "expected header '" + key + "' not to match " + value + ' but got ' + i(header),
+        "expected header '" + key + "' to match " + value + ' but got ' + header,
+        "expected header '" + key + "' not to match " + value + ' but got ' + header,
         value,
         header
       )
     } else {
       this.assert(
         header == value,
-        "expected header '" + key + "' to have value " + value + ' but got ' + i(header),
+        "expected header '" + key + "' to have value " + value + ' but got ' + header,
         "expected header '" + key + "' to not have value " + value,
         value,
         header
