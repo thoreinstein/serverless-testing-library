@@ -68,7 +68,7 @@ const configureServer = config => {
 }
 
 const get = server => {
-  return (path, options = {}) => {
+  return (path, options = { headers: {} }) => {
     const { headers } = options
 
     return new Promise(async (resolve, reject) => {
@@ -86,20 +86,14 @@ const get = server => {
 }
 
 const post = server => {
-  return (path, options = {}) => {
-    let req = request(server)
+  return (path, options = { headers: {} }) => {
     const { data, headers } = options
 
     return new Promise(async (resolve, reject) => {
-      req = req.post(path)
-
-      if (headers) {
-        for (let header in headers) {
-          req.set(header, headers[header])
-        }
-      }
-
-      const response = await req.send({ ...data })
+      const response = await request(server)
+        .post(path)
+        .set(headers)
+        .send({ ...data })
 
       resolve({
         status: response.status,
@@ -111,7 +105,7 @@ const post = server => {
 }
 
 const patch = server => {
-  return (path, options = {}) => {
+  return (path, options = { headers: {} }) => {
     const { data, headers } = options
 
     return new Promise(async (resolve, reject) => {
@@ -130,7 +124,7 @@ const patch = server => {
 }
 
 const put = server => {
-  return (path, options = {}) => {
+  return (path, options = { headers: {} }) => {
     const { data, headers } = options
 
     return new Promise(async (resolve, reject) => {
@@ -150,7 +144,7 @@ const put = server => {
 }
 
 const del = server => {
-  return (path, options = {}) => {
+  return (path, options = { headers: {} }) => {
     const { headers } = options
 
     return new Promise(async (resolve, reject) => {

@@ -71,7 +71,7 @@ describe('createApp', () => {
       })
 
       expect(supertest.post).toHaveBeenCalledWith('/users')
-      expect(supertest.post().send).toHaveBeenCalledWith({ name: 'Jon' })
+      expect(supertest.post().set().send).toHaveBeenCalledWith({ name: 'Jon' })
     })
 
     it('correctly sets headers', async () => {
@@ -82,7 +82,7 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.post().set).toHaveBeenCalledWith('x-api-key', 'foobar')
+      expect(supertest.post().set).toHaveBeenCalledWith({ 'x-api-key': 'foobar' })
     })
 
     it('correctly sets multiple headers', async () => {
@@ -94,8 +94,10 @@ describe('createApp', () => {
         },
       })
 
-      expect(supertest.post().set).toHaveBeenCalledWith('x-api-key', 'foobar')
-      expect(supertest.post().set).toHaveBeenCalledWith('Content-Type', 'application/json')
+      expect(supertest.post().set).toHaveBeenCalledWith({
+        'x-api-key': 'foobar',
+        'Content-Type': 'application/json',
+      })
     })
 
     it('returns a properly formatted response', async () => {
